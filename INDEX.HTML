@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asistencia de Estudiantes</title>
+  <link rel="stylesheet" href="/CSS/Style.css">
+</head>
+<body>
+  <h1>Asistencia de Estudiantes</h1>
+
+  <form id="form-agregar">
+    <input type="text" id="nombre-estudiante" placeholder="Nombre del estudiante" required>
+    <button type="submit">Agregar Estudiante</button>
+  </form>
+
+  <table id="tabla-asistencia">
+    <thead>
+      <tr>
+        <th>Nombre del Estudiante</th>
+        <th>Estado de Asistencia</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Los estudiantes serán añadidos dinámicamente -->
+    </tbody>
+  </table>
+
+  <button id="btn-resumen">Ver Resumen</button>
+  <div id="resumen-asistencia"></div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
