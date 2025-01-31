@@ -50,8 +50,12 @@ function agregarEstudiante() {
   document.getElementById('form-agregar').addEventListener('submit', agregarEstudiante);
 }
 
-
-function cargarEstudiantes() {
+function guardarEstudiante(nombre, asistencia, fecha) {
+  let estudiantes = JSON.parse(localStorage.getItem("estudiantes")) || [];
+  estudiantes.push({ nombre, asistencia, fecha });
+  localStorage.setItem("estudiantes", JSON.stringify(estudiantes));
+}
+ function cargarEstudiantes() {
   let estudiantes = JSON.parse(localStorage.getItem("estudiantes")) || [];
   let lista = document.getElementById("listaEstudiantes");
   lista.innerHTML = "";
@@ -69,23 +73,21 @@ function cargarEstudiantes() {
               </td>
           </tr>
       `;
-      lista.insertAdjacentHTML('beforeend', fila);  // Usamos insertAdjacentHTML para evitar sobrescribir el contenido
+      lista.insertAdjacentHTML('beforeend', fila);
   });
 }
-
-function marcarAsistencia(index, estado) {
-  let estudiantes = JSON.parse(localStorage.getItem("estudiantes")) || [];
+ function marcarAsistencia(index, estado) {
+  let estudiantes = JSON.parse(localStorage.getItem("estudiantes"));
   estudiantes[index].asistencia = estado;
-  estudiantes[index].fecha = new Date().toLocaleDateString();
   localStorage.setItem("estudiantes", JSON.stringify(estudiantes));
-  cargarEstudiantes();
+  cargarEstudiantes(); // Recargar la lista para reflejar los cambios
 }
 
 function removerEstudiante(index) {
-  let estudiantes = JSON.parse(localStorage.getItem("estudiantes")) || [];
+  let estudiantes = JSON.parse(localStorage.getItem("estudiantes"));
   estudiantes.splice(index, 1);
   localStorage.setItem("estudiantes", JSON.stringify(estudiantes));
-  cargarEstudiantes();
+  cargarEstudiantes(); // Recargar la lista para reflejar los cambios
 }
 
 function verResumen() {
