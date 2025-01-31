@@ -17,6 +17,7 @@
   <table id="tabla-asistencia">
     <thead>
       <tr>
+        <ul id="lista-estudiantes"></ul>
         <th>Nombre del Estudiante</th>
         <th>Estado de Asistencia</th>
         <th>Fecha</th>
@@ -32,5 +33,34 @@
   <div id="resumen-asistencia"></div>
 
   <script src="/js/script.js"></script>
+  <script>
+    // Seleccionamos el botón y el div donde se mostrará el resumen
+    const btnResumen = document.getElementById('btn-resumen');
+    const resumenAsistencia = document.getElementById('resumen-asistencia');
+
+    // Implementamos el evento click para el botón
+    btnResumen.addEventListener('click', function() {
+      // Cambiamos el contenido del div con el resumen de la asistencia
+      resumenAsistencia.innerHTML = 'Aquí va el resumen de la asistencia de los participantes del evento.';
+    });
+    
+    // Función para mostrar estudiantes del localStorage
+function mostrarEstudiantes() {
+    let estudiantes = JSON.parse(localStorage.getItem('estudiantes')) || [];
+    let listaEstudiantes = document.getElementById('lista-estudiantes'); // Suponiendo que tienes un contenedor con ese id
+
+    listaEstudiantes.innerHTML = ''; // Limpiar lista anterior
+    estudiantes.forEach(estudiante => {
+        let item = document.createElement('li');
+        item.textContent = estudiante.nombre; // Suponiendo que cada estudiante tiene un campo 'nombre'
+        listaEstudiantes.appendChild(item);
+    });
+}
+
+// Llamar a la función para mostrar estudiantes al cargar la página
+window.onload = mostrarEstudiantes;
+  </script>
+
+  
 </body>
 </html>
