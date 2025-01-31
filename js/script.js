@@ -9,61 +9,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-function agregarEstudiante() {
-   // Función para agregar el estudiante al localStorage
-   function agregarEstudiante(event) {
-    // Evitamos que el formulario se envíe y recargue la página
-    event.preventDefault();
-
-    // Obtenemos el nombre del estudiante desde el input
-    const nombreEstudiante = document.getElementById('nombre-estudiante').value;
-
-    // Verificamos que el nombre no esté vacío
-    if (nombreEstudiante.trim() === "") {
-      alert("Por favor, ingresa un nombre.");
-      return;
-    }
-
-    // Recuperamos los estudiantes actuales del localStorage
-    let estudiantes = JSON.parse(localStorage.getItem("estudiantes")) || [];
-
-    // Creamos un nuevo objeto para el estudiante
-    const nuevoEstudiante = {
-      nombre: nombreEstudiante,  // Coma añadida
-      asistencia: "No registrada",  // Coma añadida
-      fecha: new Date().toLocaleDateString()  // Coma añadida
-    };
-
-    // Agregamos el nuevo estudiante al array de estudiantes
-    estudiantes.push(nuevoEstudiante);
-
-    // Guardamos el array actualizado en el localStorage
-    localStorage.setItem("estudiantes", JSON.stringify(estudiantes));
-
-    // Limpiamos el input después de agregar el estudiante
-    document.getElementById('nombre-estudiante').value = "";
-
-    alert('Estudiante ${nombreEstudiante} agregado con éxito.');  // Interpolación de cadena con comillas invertidas
-  }
-
-  // Agregamos el evento click al botón de enviar el formulario
-  document.getElementById('form-agregar').addEventListener('submit', agregarEstudiante);
-}
-
-function guardarEstudiante(nombre, asistencia, fecha) {
+function guardarEstudiante() {
+  const nombreEstudiante=document.getElementById('nombre-estudiante').value;
+  const asistencia="no definida";
+  const fecha=new Date().toLocaleDateString();
   let estudiantes = JSON.parse(localStorage.getItem("estudiantes")) || [];
-  estudiantes.push({ nombre, asistencia, fecha });
+  estudiantes.push({ nombreEstudiante, asistencia, fecha });
   localStorage.setItem("estudiantes", JSON.stringify(estudiantes));
+
 }
  function cargarEstudiantes() {
   let estudiantes = JSON.parse(localStorage.getItem("estudiantes")) || [];
-  let lista = document.getElementById("listaEstudiantes");
+  let lista = document.getElementById("lista-Estudiantes");
   lista.innerHTML = "";
 
   estudiantes.forEach((estudiante, index) => {
       let fila = `
           <tr>
-              <td>${estudiante.nombre}</td>
+              <td>${estudiante.nombreEstudiante}</td>
               <td>${estudiante.asistencia}</td>
               <td>${estudiante.fecha}</td>
               <td>
